@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">MovieApp</string>
+    <string name="popular">Popular</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="drawer_close">Close</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string-array name="menu_names">
+        <item>@string/popular</item>
+        <item>@string/upcoming</item>
+        <item>@string/top_rated</item>
+        <item>@string/drawer_close</item>
+    </string-array>
+
+    <integer-array name="menu_icons">
+        <item>@drawable/ic_popular</item>
+        <item>@drawable/ic_upcoming</item>
+        <item>@drawable/ic_top_rated</item>
+        <item>@drawable/ic_close</item>
+    </integer-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_text">No Series in this list</string>
+
+</resources>
