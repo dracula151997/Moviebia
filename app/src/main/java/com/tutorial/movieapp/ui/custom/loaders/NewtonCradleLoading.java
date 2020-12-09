@@ -1,6 +1,8 @@
 package com.tutorial.movieapp.ui.custom.loaders;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.animation.Animation;
@@ -27,6 +29,9 @@ public class NewtonCradleLoading extends LinearLayout
     private static final float PIVOT_X = 0.5f;
     private static final float PIVOT_Y = -3f;
     private static final int DEGREE = 30;
+    private int progressColor = Color.WHITE;
+
+    private boolean autoStart = false;
 
 
     private boolean isStart = false;
@@ -34,24 +39,31 @@ public class NewtonCradleLoading extends LinearLayout
     public NewtonCradleLoading(Context context)
     {
         super(context);
-        initView(context);
+        initView(context, null);
     }
 
     public NewtonCradleLoading(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-        initView(context);
+        initView(context, attrs);
     }
 
     public NewtonCradleLoading(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
-        initView(context);
+        initView(context, attrs);
     }
 
-    private void initView(Context context)
+    private void initView(Context context, AttributeSet attrs)
     {
         LayoutInflater.from(context).inflate(R.layout.newton_cradle_loading, this, true);
+        if (attrs != null)
+        {
+            TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.NewtonCradleLoading);
+            progressColor = typedArray.getColor(R.styleable.NewtonCradleLoading_loading_color, Color.WHITE);
+            autoStart = typedArray.getBoolean(R.styleable.NewtonCradleLoading_auto_start, false);
+            typedArray.recycle();
+        }
     }
 
     @Override
@@ -64,7 +76,12 @@ public class NewtonCradleLoading extends LinearLayout
         cradleBallFour = findViewById(R.id.ball_four);
         cradleBallFive = findViewById(R.id.ball_five);
 
+        setLoadingColor(progressColor);
+
         initAnim();
+
+        if (autoStart)
+            start();
     }
 
     RotateAnimation rotateLeftAnimation;//cradleBallOne left to right

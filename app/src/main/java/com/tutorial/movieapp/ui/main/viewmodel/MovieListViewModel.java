@@ -34,7 +34,7 @@ public class MovieListViewModel extends BaseViewModel
     public void fetchMovies(Long currentPage)
     {
         movieRepository.fetchMovieByType(currentPage, type)
-                .doOnSubscribe(disposable -> addToDisposable(disposable))
+                .doOnSubscribe(this::addToDisposable)
                 .subscribe(response -> getMoviesLiveData().postValue(response));
     }
 
@@ -47,4 +47,5 @@ public class MovieListViewModel extends BaseViewModel
     {
         return movieListLiveData;
     }
+
 }

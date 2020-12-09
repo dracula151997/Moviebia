@@ -5,6 +5,11 @@
         <attr name="cradle_ball_color" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="NewtonCradleLoading">
+        <attr name="loading_color" format="color"/>
+        <attr name="auto_start" format="boolean"/>
+    </declare-styleable>
+
 
     <declare-styleable name="ExpandableLayout">
         <attr name="el_duration" format="integer" />
@@ -28,6 +33,7 @@
         <attr name="cp_textPaddingTop" format="dimension" />
         <attr name="cp_textPaddingBottom" format="dimension" />
         <attr name="cp_simplified" format="boolean" />
+        <attr name="cp_randomColor" format="boolean"/>
     </declare-styleable>
 
 

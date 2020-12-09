@@ -20,8 +20,8 @@ import io.reactivex.Observable;
 @Singleton
 public class MovieRepository
 {
-    private MovieApiService apiService;
-    private MovieDao movieDao;
+    private final MovieApiService apiService;
+    private final MovieDao movieDao;
 
     public MovieRepository(MovieApiService apiService, MovieDao movieDao)
     {
@@ -92,6 +92,64 @@ public class MovieRepository
                         .flatMap(response -> Observable.just(response == null ?
                                 Resource.error("", new MovieApiResponse()) :
                                 Resource.success(response)));
+            }
+        }.getAsObservable();
+    }
+
+    public Observable<Resource<MovieEntity>> getMovieDetailsById(Long movieId)
+    {
+        return new NetworkBoundResource<MovieEntity, MovieEntity>()
+        {
+            @Override
+            protected void saveCallResult(MovieEntity item)
+            {
+                MovieEntity storedMovieEntity = movieDao.getMovieById(movieId);
+                if (storedMovieEntity == null) movieDao.insert(item);
+                else movieDao.update(item);
+            }
+
+            @Override
+            protected boolean shouldFetch()
+            {
+                return true;
+            }
+
+            @Override
+            protected Flowable<MovieEntity> loadFromDb()
+            {
+                MovieEntity movieEntity = movieDao.getMovieById(movieId);
+                if (movieEntity == null) return Flowable.empty();
+                else return Flowable.just(movieEntity);
+            }
+
+            @Override
+            protected Observable<Resource<MovieEntity>> createCall()
+            {
+                String id = String.valueOf(movieId);
+                return Observable.combineLatest(apiService.fetchMovieDetail(id),
+                        apiService.fetchMovieReviews(id),
+                        apiService.fetchMovieVideo(id),
+                        apiService.fetchSimilarMovie(id, 1),
+                        apiService.fetchCastDetail(id),
+                        (movieEntity, reviewResponse, videoResponse, movieResponse, creditResponse) ->
+                        {
+                            if (videoResponse != null)
+                                movieEntity.setVideos(videoResponse.getResults());
+
+                            if (creditResponse != null)
+                            {
+                                movieEntity.setCrews(creditResponse.getCrew());
+                                movieEntity.setCasts(creditResponse.getCast());
+                            }
+
+                            if (movieResponse != null)
+                                movieEntity.setSimilarMovies(movieResponse.getResults());
+
+                            if (reviewResponse != null)
+                                movieEntity.setReviews(reviewResponse.getResults());
+
+                            return Resource.success(movieEntity);
+                        });
             }
         }.getAsObservable();
     }

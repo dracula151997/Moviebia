@@ -4,11 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import com.tutorial.movieapp.AppConstants;
 import com.tutorial.movieapp.R;
+import com.tutorial.movieapp.local.entity.MovieEntity;
+import com.tutorial.movieapp.ui.details.activity.MovieDetailsActivity;
 
 public class NavigationUtil implements AppConstants
 {
@@ -16,6 +20,13 @@ public class NavigationUtil implements AppConstants
     {
         Intent intent = new Intent(activity, clazz);
         activity.startActivity(intent);
+    }
+
+    public static void redirectToDetailScreen(Activity activity, MovieEntity entity, ActivityOptionsCompat options)
+    {
+        Intent intent = new Intent(activity, MovieDetailsActivity.class);
+        intent.putExtra(INTENT_MOVIE, entity);
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
     public static void replaceFragment(Activity activity, int navId, int selectedPosition)

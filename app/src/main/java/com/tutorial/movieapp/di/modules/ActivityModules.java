@@ -1,5 +1,6 @@
 package com.tutorial.movieapp.di.modules;
 
+import com.tutorial.movieapp.ui.details.activity.MovieDetailsActivity;
 import com.tutorial.movieapp.ui.main.activity.MainActivity;
 import com.tutorial.movieapp.ui.search.MovieSearchActivity;
 import com.tutorial.movieapp.ui.search.TvSearchActivity;
@@ -18,4 +19,7 @@ public abstract class ActivityModules
 
     @ContributesAndroidInjector
     abstract MovieSearchActivity contributeMovieSearchActivity();
+
+    @ContributesAndroidInjector
+    abstract MovieDetailsActivity contributeMovieDetailsActivity();
 }

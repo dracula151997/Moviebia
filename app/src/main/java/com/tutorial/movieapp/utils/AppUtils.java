@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.tutorial.movieapp.R;
 import com.tutorial.movieapp.local.entity.MovieEntity;
 import com.tutorial.movieapp.local.entity.TvEntity;
+import com.tutorial.movieapp.remote.model.Genre;
 import com.tutorial.movieapp.ui.custom.menu.SlideMenuItem;
 
 import java.text.ParsePosition;
@@ -26,6 +27,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class AppUtils
 {
@@ -59,7 +61,18 @@ public class AppUtils
         }
     }
 
+    public static List<String> getGenres(List<Genre> genres)
+    {
+        List<String> genersName = new ArrayList<>(genres.size());
+        for (Genre genre : genres)
+        {
+            genersName.add(genre.getName());
+        }
+
+        return genersName;
+    }
 /*
+
     public static List<String> getGenres(List<Genre> genres)
     {
         List<String> genreNames = new ArrayList<>(genres.size());
