@@ -186,6 +186,6 @@ public class MoviesFragment extends BaseFragment implements AppConstants, Recycl
         movieListViewModel.onStop();
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
                 new Pair<>(childView.findViewById(R.id.movie_image), TRANSITION_IMAGE_NAME));
-        NavigationUtil.redirectToDetailScreen(activity, movieAdapter.getItem(position), options);
+        NavigationUtil.redirectToMovieDetailScreen(activity, movieAdapter.getItem(position), options);
     }
 }

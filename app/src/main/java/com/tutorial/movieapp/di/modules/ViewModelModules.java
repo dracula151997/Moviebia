@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.tutorial.movieapp.di.ViewModelKey;
 import com.tutorial.movieapp.di.factory.ViewModelFactory;
 import com.tutorial.movieapp.ui.details.viewmodel.MovieDetailsViewModel;
+import com.tutorial.movieapp.ui.details.viewmodel.TvDetailsViewModel;
 import com.tutorial.movieapp.ui.main.viewmodel.MovieListViewModel;
 import com.tutorial.movieapp.ui.main.viewmodel.TvListViewModel;
 
@@ -33,5 +34,10 @@ public abstract class ViewModelModules
     @IntoMap
     @ViewModelKey(MovieDetailsViewModel.class)
     protected abstract ViewModel bindMovieDetailsViewModel(MovieDetailsViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TvDetailsViewModel.class)
+    protected abstract ViewModel bindTvDetailsViewModel(TvDetailsViewModel viewModel);
 
 }

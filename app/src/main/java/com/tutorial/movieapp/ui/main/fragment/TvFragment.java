@@ -7,10 +7,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.tutorial.movieapp.AppConstants;
+import com.tutorial.movieapp.R;
 import com.tutorial.movieapp.databinding.FragmentMoviesBinding;
 import com.tutorial.movieapp.di.factory.ViewModelFactory;
 import com.tutorial.movieapp.local.entity.TvEntity;
@@ -21,6 +24,7 @@ import com.tutorial.movieapp.ui.main.adapters.RecyclerItemClickListener;
 import com.tutorial.movieapp.ui.main.adapters.RecyclerViewPaginator;
 import com.tutorial.movieapp.ui.main.adapters.TvListAdapter;
 import com.tutorial.movieapp.ui.main.viewmodel.TvListViewModel;
+import com.tutorial.movieapp.utils.NavigationUtil;
 
 import java.util.List;
 
@@ -185,6 +189,10 @@ public class TvFragment extends BaseFragment implements AppConstants, RecyclerIt
     @Override
     public void onItemClicked(View parentView, View childView, int position)
     {
-
+        tvListViewModel.onStop();
+        ActivityOptionsCompat options =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, new Pair<>(childView.findViewById(R.id.movie_image), TRANSITION_IMAGE_NAME));
+        TvEntity item = adapter.getItem(position);
+        NavigationUtil.redirectToTvDetailsScreen(activity, item, options);
     }
 }

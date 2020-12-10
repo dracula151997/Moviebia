@@ -12,7 +12,9 @@ import androidx.navigation.Navigation;
 import com.tutorial.movieapp.AppConstants;
 import com.tutorial.movieapp.R;
 import com.tutorial.movieapp.local.entity.MovieEntity;
+import com.tutorial.movieapp.local.entity.TvEntity;
 import com.tutorial.movieapp.ui.details.activity.MovieDetailsActivity;
+import com.tutorial.movieapp.ui.details.activity.TvDetailsActivity;
 
 public class NavigationUtil implements AppConstants
 {
@@ -22,9 +24,16 @@ public class NavigationUtil implements AppConstants
         activity.startActivity(intent);
     }
 
-    public static void redirectToDetailScreen(Activity activity, MovieEntity entity, ActivityOptionsCompat options)
+    public static void redirectToMovieDetailScreen(Activity activity, MovieEntity entity, ActivityOptionsCompat options)
     {
         Intent intent = new Intent(activity, MovieDetailsActivity.class);
+        intent.putExtra(INTENT_MOVIE, entity);
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
+
+    public static void redirectToTvDetailsScreen(Activity activity, TvEntity entity, ActivityOptionsCompat options)
+    {
+        Intent intent = new Intent(activity, TvDetailsActivity.class);
         intent.putExtra(INTENT_MOVIE, entity);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }

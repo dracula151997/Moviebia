@@ -87,4 +87,55 @@ public class TvRepository
             }
         }.getAsObservable();
     }
+
+    public Observable<Resource<TvEntity>> getTvMovieDetails(Long movieId)
+    {
+        return new NetworkBoundResource<TvEntity, TvEntity>()
+        {
+            @Override
+            protected void saveCallResult(TvEntity item)
+            {
+                TvEntity storedTvEntity = tvDao.getTvById(item.getId());
+                if (storedTvEntity == null) tvDao.insert(item);
+                else tvDao.update(item);
+            }
+
+            @Override
+            protected boolean shouldFetch()
+            {
+                return true;
+            }
+
+            @Override
+            protected Flowable<TvEntity> loadFromDb()
+            {
+                TvEntity tvMovie = tvDao.getTvById(movieId);
+                if (tvMovie == null) return Flowable.empty();
+
+                return Flowable.just(tvMovie);
+            }
+
+            @Override
+            protected Observable<Resource<TvEntity>> createCall()
+            {
+                String id = String.valueOf(movieId);
+                return Observable.combineLatest(
+                        tvApiService.fetchTvDetail(id),
+                        tvApiService.fetchTvReviews(id),
+                        tvApiService.fetchTvVideo(id),
+                        tvApiService.fetchSimilarTvList(id, 1),
+                        tvApiService.fetchCastDetail(id),
+                        (tvEntity, reviewResponse, videoResponse, tvResponse, creditResponse) ->
+                        {
+                            tvEntity.setReviews(reviewResponse.getResults());
+                            tvEntity.setCrews(creditResponse.getCrew());
+                            tvEntity.setCasts(creditResponse.getCast());
+                            tvEntity.setVideos(videoResponse.getResults());
+                            tvEntity.setSimilarTvEntities(tvResponse.getResults());
+                            return Resource.success(tvEntity);
+                        }
+                );
+            }
+        }.getAsObservable();
+    }
 }
