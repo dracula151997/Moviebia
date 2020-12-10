@@ -3,10 +3,13 @@ package com.tutorial.movieapp.ui.details.activity;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.core.view.ViewCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 
 import com.squareup.picasso.Picasso;
 import com.tutorial.movieapp.R;
@@ -17,11 +20,15 @@ import com.tutorial.movieapp.local.entity.MovieEntity;
 import com.tutorial.movieapp.remote.Resource;
 import com.tutorial.movieapp.remote.model.Cast;
 import com.tutorial.movieapp.remote.model.Crew;
+import com.tutorial.movieapp.remote.model.Review;
 import com.tutorial.movieapp.ui.base.BaseActivity;
 import com.tutorial.movieapp.ui.details.adapter.CreditAdapter;
+import com.tutorial.movieapp.ui.details.adapter.ReviewsAdapter;
 import com.tutorial.movieapp.ui.details.adapter.SimilarMoviesAdapter;
 import com.tutorial.movieapp.ui.details.viewmodel.MovieDetailsViewModel;
+import com.tutorial.movieapp.ui.main.adapters.RecyclerItemClickListener;
 import com.tutorial.movieapp.utils.AppUtils;
+import com.tutorial.movieapp.utils.NavigationUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -110,16 +117,41 @@ public class MovieDetailsActivity extends BaseActivity implements MovieDetailsLi
         binding.movieStatus.setItems(Collections.singletonList(entity.getStatus()));
         binding.movieDuration.setText(String.format("%s min", entity.getRuntime()));
         binding.readMoreTxt.setVisibility(View.VISIBLE);
+        binding.reviewsTxt.setVisibility(View.VISIBLE);
+        binding.similarMoviesTxt.setVisibility(View.VISIBLE);
         updateMovieCast(entity.getCasts());
         updateMovieCrew(entity.getCrews());
         updateSimilarMovies(entity.getSimilarMovies());
+        updateMovieReviews(entity.getReviews());
 
     }
+
+    private void updateMovieReviews(List<Review> reviews)
+    {
+        if (reviews.isEmpty())
+        {
+            binding.reviewsRecyclerView.setVisibility(View.GONE);
+            binding.emptyViewTxt.setVisibility(View.VISIBLE);
+        }
+        ReviewsAdapter adapter = new ReviewsAdapter(this, reviews);
+        binding.reviewsRecyclerView.setAdapter(adapter);
+
+        binding.reviewsRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+    }
+
 
     private void updateSimilarMovies(List<MovieEntity> similarMovies)
     {
         SimilarMoviesAdapter adapter = new SimilarMoviesAdapter(this, similarMovies);
         binding.similarMoviesRecycler.setAdapter(adapter);
+
+        binding.similarMoviesRecycler.addOnItemTouchListener(new RecyclerItemClickListener(this, (parentView, childView, position) ->
+        {
+            MovieEntity movie = adapter.getItem(position);
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                    new Pair<>(childView, TRANSITION_IMAGE_NAME));
+            NavigationUtil.redirectToDetailScreen(this, movie, options);
+        }));
     }
 
     private void updateMovieCrew(List<Crew> crews)
