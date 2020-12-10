@@ -3,8 +3,8 @@ package com.tutorial.movieapp.di.modules;
 import com.tutorial.movieapp.ui.details.activity.MovieDetailsActivity;
 import com.tutorial.movieapp.ui.details.activity.TvDetailsActivity;
 import com.tutorial.movieapp.ui.main.activity.MainActivity;
-import com.tutorial.movieapp.ui.search.MovieSearchActivity;
-import com.tutorial.movieapp.ui.search.TvSearchActivity;
+import com.tutorial.movieapp.ui.search.activity.MovieSearchActivity;
+import com.tutorial.movieapp.ui.search.activity.TvSearchActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

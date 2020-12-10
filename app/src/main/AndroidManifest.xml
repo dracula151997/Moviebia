@@ -14,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieApp">
         <activity android:name=".ui.details.activity.MovieDetailsActivity"></activity>
-        <activity android:name=".ui.search.TvSearchActivity" />
-        <activity android:name=".ui.search.MovieSearchActivity" />
+        <activity android:name=".ui.search.activity.TvSearchActivity" />
+        <activity android:name=".ui.search.activity.MovieSearchActivity" />
         <activity android:name=".ui.details.activity.TvDetailsActivity"/>
         <activity android:name=".ui.main.activity.MainActivity">
             <intent-filter>

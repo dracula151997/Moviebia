@@ -11,8 +11,8 @@ import com.tutorial.movieapp.R;
 import com.tutorial.movieapp.databinding.MainActivityBinding;
 import com.tutorial.movieapp.ui.base.BaseActivity;
 import com.tutorial.movieapp.ui.custom.menu.MenuDrawerToggle;
-import com.tutorial.movieapp.ui.search.MovieSearchActivity;
-import com.tutorial.movieapp.ui.search.TvSearchActivity;
+import com.tutorial.movieapp.ui.search.activity.MovieSearchActivity;
+import com.tutorial.movieapp.ui.search.activity.TvSearchActivity;
 import com.tutorial.movieapp.utils.AppUtils;
 import com.tutorial.movieapp.utils.NavigationUtil;
 
@@ -46,6 +46,14 @@ public class MainActivity extends BaseActivity implements HasSupportFragmentInje
         setToolbar();
         initDrawer();
         mainBinding.toolbarLayout.radioGroup.setOnCheckedChangeListener(this::onCheckedChanged);
+        mainBinding.toolbarLayout.search.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                handleSearchIconClicked(view);
+            }
+        });
 
     }
 

@@ -40,5 +40,5 @@ public interface MovieApiService
 
     @GET("/3/search/movie")
     Observable<MovieApiResponse> searchMoviesByQuery(@Query("query") String query,
-                                                     @Query("page") String page);
+                                                     @Query("page") Long page);
 }

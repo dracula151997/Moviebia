@@ -1,4 +1,4 @@
-package com.tutorial.movieapp.ui.search;
+package com.tutorial.movieapp.ui.search.activity;
 
 import android.os.Bundle;
 

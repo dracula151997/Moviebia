@@ -30,5 +30,6 @@
     <string name="similar_movies">Similar Movies</string>
     <string name="reviews">Reviews</string>
     <string name="no_reviews_for_this_movie">No reviews for this movie</string>
+    <string name="search">Search</string>
 
 </resources>

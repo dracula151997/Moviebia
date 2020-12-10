@@ -153,4 +153,57 @@ public class MovieRepository
             }
         }.getAsObservable();
     }
+
+    public Observable<Resource<List<MovieEntity>>> searchForMovie(String query, Long page)
+    {
+        return new NetworkBoundResource<List<MovieEntity>, MovieApiResponse>()
+        {
+            @Override
+            protected void saveCallResult(MovieApiResponse item)
+            {
+                List<MovieEntity> movieEntities = new ArrayList<>();
+                for (MovieEntity movie : item.getResults())
+                {
+                    MovieEntity storedMovie = movieDao.getMovieById(movie.getId());
+                    if (storedMovie == null)
+                        movie.setCategoryTypes(Collections.singletonList(query));
+                    else
+                    {
+                        List<String> categories = storedMovie.getCategoryTypes();
+                        categories.add(query);
+                        movie.setCategoryTypes(categories);
+                    }
+                    movie.setPage(item.getPage());
+                    movie.setTotalPages(item.getTotalPages());
+                    movieEntities.add(movie);
+                }
+
+                movieDao.insertAll(movieEntities);
+            }
+
+            @Override
+            protected boolean shouldFetch()
+            {
+                return true;
+            }
+
+            @Override
+            protected Flowable<List<MovieEntity>> loadFromDb()
+            {
+                List<MovieEntity> movieEntity = movieDao.getMoviesByPage(page);
+                if (movieEntity == null || movieEntity.isEmpty())
+                    return Flowable.empty();
+                return Flowable.just(AppUtils.getMoviesByType(query, movieEntity));
+            }
+
+            @Override
+            protected Observable<Resource<MovieApiResponse>> createCall()
+            {
+                return apiService.searchMoviesByQuery(query, page)
+                        .flatMap(response -> Observable.just(response == null ?
+                                Resource.error("No data found", new MovieApiResponse())
+                                : Resource.success(response)));
+            }
+        }.getAsObservable();
+    }
 }
