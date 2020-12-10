@@ -23,5 +23,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="empty_text">No Series in this list</string>
+    <string name="read_more">Read more</string>
+    <string name="cast">Cast</string>
+    <string name="crew">Crew</string>
+    <string name="read_less">Read less</string>
 
 </resources>

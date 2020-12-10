@@ -8,6 +8,10 @@
         <variable
             name="movie"
             type="com.tutorial.movieapp.local.entity.MovieEntity" />
+
+        <variable
+            name="listener"
+            type="com.tutorial.movieapp.interfaces.MovieDetailsListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -150,6 +154,34 @@
                             android:textSize="12sp"
                             app:layout_constraintStart_toEndOf="@id/movie_status"
                             app:layout_constraintTop_toBottomOf="@id/movie_description" />
+
+                        <TextView
+                            android:id="@+id/read_more_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:autoLink="all"
+                            android:onClick="@{() -> listener.onReadMoreClicked()}"
+                            android:paddingStart="8dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="8dp"
+                            android:paddingBottom="8dp"
+                            android:text="@string/read_more"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/movie_duration" />
+
+
+                        <include
+                            android:id="@+id/included_layout"
+                            layout="@layout/layout_details_expandable"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/read_more_txt" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

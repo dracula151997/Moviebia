@@ -12,19 +12,24 @@ import com.squareup.picasso.Picasso;
 import com.tutorial.movieapp.R;
 import com.tutorial.movieapp.databinding.ActivityMovieDetailsBinding;
 import com.tutorial.movieapp.di.factory.ViewModelFactory;
+import com.tutorial.movieapp.interfaces.MovieDetailsListener;
 import com.tutorial.movieapp.local.entity.MovieEntity;
 import com.tutorial.movieapp.remote.Resource;
+import com.tutorial.movieapp.remote.model.Cast;
+import com.tutorial.movieapp.remote.model.Crew;
 import com.tutorial.movieapp.ui.base.BaseActivity;
+import com.tutorial.movieapp.ui.details.adapter.CreditAdapter;
 import com.tutorial.movieapp.ui.details.viewmodel.MovieDetailsViewModel;
 import com.tutorial.movieapp.utils.AppUtils;
 
 import java.util.Collections;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 
-public class MovieDetailsActivity extends BaseActivity
+public class MovieDetailsActivity extends BaseActivity implements MovieDetailsListener
 {
     private static final String TAG = "MovieDetailsActivity";
     ActivityMovieDetailsBinding binding;
@@ -50,6 +55,7 @@ public class MovieDetailsActivity extends BaseActivity
     private void initViews()
     {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_details);
+        binding.setListener(this);
 
         Picasso.get().load(movie.getPosterPath()).into(binding.movieImage);
         ViewCompat.setTransitionName(binding.movieImage, TRANSITION_IMAGE_NAME);
@@ -102,6 +108,35 @@ public class MovieDetailsActivity extends BaseActivity
         binding.genersCollection.setItems(AppUtils.getGenres(entity.getGenres()));
         binding.movieStatus.setItems(Collections.singletonList(entity.getStatus()));
         binding.movieDuration.setText(String.format("%s min", entity.getRuntime()));
+        binding.readMoreTxt.setVisibility(View.VISIBLE);
+        updateMovieCast(entity.getCasts());
+        updateMovieCrew(entity.getCrews());
 
+    }
+
+    private void updateMovieCrew(List<Crew> crews)
+    {
+        CreditAdapter adapter = new CreditAdapter(this, CREDIT_CREW, crews);
+        binding.includedLayout.crewRecyclerView.setAdapter(adapter);
+    }
+
+    private void updateMovieCast(List<Cast> casts)
+    {
+        CreditAdapter adapter = new CreditAdapter(this, casts);
+        binding.includedLayout.castRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onReadMoreClicked()
+    {
+        if (binding.includedLayout.expandableLayout.isExpanded())
+        {
+            binding.readMoreTxt.setText(getString(R.string.read_more));
+            binding.includedLayout.expandableLayout.collapse();
+        } else
+        {
+            binding.readMoreTxt.setText(getString(R.string.read_less));
+            binding.includedLayout.expandableLayout.expand();
+        }
     }
 }
