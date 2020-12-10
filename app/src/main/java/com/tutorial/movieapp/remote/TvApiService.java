@@ -39,5 +39,5 @@ public interface TvApiService
 
     @GET("/3/search/tv")
     Observable<TvApiResponse> searchTvsByQuery(@Query("query") String query,
-                                               @Query("page") String page);
+                                               @Query("page") Long page);
 }

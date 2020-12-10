@@ -138,4 +138,58 @@ public class TvRepository
             }
         }.getAsObservable();
     }
+
+    public Observable<Resource<List<TvEntity>>> searchForMovie(String query, Long page)
+    {
+        return new NetworkBoundResource<List<TvEntity>, TvApiResponse>()
+        {
+            @Override
+            protected void saveCallResult(TvApiResponse item)
+            {
+                List<TvEntity> tvEntities = new ArrayList<>();
+                for (TvEntity tvEntity : item.getResults())
+                {
+                    TvEntity storedEntity = tvDao.getTvById(tvEntity.getId());
+                    if (storedEntity == null)
+                        storedEntity.setCategoryTypes(Collections.singletonList(query));
+                    else
+                    {
+                        List<String> categories = storedEntity.getCategoryTypes();
+                        categories.add(query);
+                        tvEntity.setCategoryTypes(categories);
+                    }
+
+                    tvEntity.setPage(item.getPage());
+                    tvEntity.setTotalPages(item.getTotalPages());
+                    tvEntities.add(tvEntity);
+                }
+
+                tvDao.insertAll(tvEntities);
+            }
+
+            @Override
+            protected boolean shouldFetch()
+            {
+                return true;
+            }
+
+            @Override
+            protected Flowable<List<TvEntity>> loadFromDb()
+            {
+                List<TvEntity> tvEntities = tvDao.getTvsByPage(page);
+                if (tvEntities == null || tvEntities.isEmpty())
+                    return Flowable.empty();
+                return Flowable.just(AppUtils.getTvListByType(query, tvEntities));
+            }
+
+            @Override
+            protected Observable<Resource<TvApiResponse>> createCall()
+            {
+                return tvApiService.searchTvsByQuery(query, page)
+                        .flatMap(response -> Observable.just(response == null
+                                ? Resource.error("No data found", new TvApiResponse())
+                                : Resource.success(response)));
+            }
+        }.getAsObservable();
+    }
 }

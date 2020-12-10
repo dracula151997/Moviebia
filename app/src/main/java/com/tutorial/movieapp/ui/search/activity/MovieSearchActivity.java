@@ -54,6 +54,8 @@ public class MovieSearchActivity extends BaseActivity implements SearchView.OnQu
         initViewModel();
 
         binding.includedLayout.loaderLayout.loaderContainer.setVisibility(View.GONE);
+
+
     }
 
     private void initViewModel()
