@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MovieApp</string>
+    <string name="app_name">Moviebia</string>
     <string name="popular">Popular</string>
     <string name="upcoming">Upcoming</string>
     <string name="top_rated">Top Rated</string>
