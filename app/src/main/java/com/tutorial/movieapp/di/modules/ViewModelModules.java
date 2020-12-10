@@ -10,6 +10,7 @@ import com.tutorial.movieapp.ui.details.viewmodel.TvDetailsViewModel;
 import com.tutorial.movieapp.ui.main.viewmodel.MovieListViewModel;
 import com.tutorial.movieapp.ui.main.viewmodel.TvListViewModel;
 import com.tutorial.movieapp.ui.search.viewmodel.MovieSearchViewModel;
+import com.tutorial.movieapp.ui.search.viewmodel.TvSearchViewModel;
 
 import dagger.Binds;
 import dagger.Module;
@@ -45,5 +46,10 @@ public abstract class ViewModelModules
     @IntoMap
     @ViewModelKey(MovieSearchViewModel.class)
     protected abstract ViewModel bindMovieSearchViewModel(MovieSearchViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TvSearchViewModel.class)
+    protected abstract ViewModel bindTvSearchViewModel(TvSearchViewModel viewModel);
 
 }

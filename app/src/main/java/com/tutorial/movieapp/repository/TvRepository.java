@@ -151,7 +151,7 @@ public class TvRepository
                 {
                     TvEntity storedEntity = tvDao.getTvById(tvEntity.getId());
                     if (storedEntity == null)
-                        storedEntity.setCategoryTypes(Collections.singletonList(query));
+                        tvEntity.setCategoryTypes(Collections.singletonList(query));
                     else
                     {
                         List<String> categories = storedEntity.getCategoryTypes();
