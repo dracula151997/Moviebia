@@ -19,6 +19,7 @@ import com.tutorial.movieapp.remote.model.Cast;
 import com.tutorial.movieapp.remote.model.Crew;
 import com.tutorial.movieapp.ui.base.BaseActivity;
 import com.tutorial.movieapp.ui.details.adapter.CreditAdapter;
+import com.tutorial.movieapp.ui.details.adapter.SimilarMoviesAdapter;
 import com.tutorial.movieapp.ui.details.viewmodel.MovieDetailsViewModel;
 import com.tutorial.movieapp.utils.AppUtils;
 
@@ -111,7 +112,14 @@ public class MovieDetailsActivity extends BaseActivity implements MovieDetailsLi
         binding.readMoreTxt.setVisibility(View.VISIBLE);
         updateMovieCast(entity.getCasts());
         updateMovieCrew(entity.getCrews());
+        updateSimilarMovies(entity.getSimilarMovies());
 
+    }
+
+    private void updateSimilarMovies(List<MovieEntity> similarMovies)
+    {
+        SimilarMoviesAdapter adapter = new SimilarMoviesAdapter(this, similarMovies);
+        binding.similarMoviesRecycler.setAdapter(adapter);
     }
 
     private void updateMovieCrew(List<Crew> crews)

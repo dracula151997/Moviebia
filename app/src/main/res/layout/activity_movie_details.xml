@@ -51,7 +51,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/movie_details_layout"
+                    android:id="@+id/movie_details_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -160,6 +160,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:autoLink="all"
+                            android:fontFamily="@font/gt_medium"
+                            android:linksClickable="true"
                             android:onClick="@{() -> listener.onReadMoreClicked()}"
                             android:paddingStart="8dp"
                             android:paddingTop="8dp"
@@ -167,7 +169,8 @@
                             android:paddingBottom="8dp"
                             android:text="@string/read_more"
                             android:textAllCaps="true"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="#3F51B5"
+                            android:textColorLink="#3F51B5"
                             android:textSize="12sp"
                             android:visibility="gone"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -187,6 +190,33 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/similar_movies_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/gt_medium"
+                    android:text="@string/similar_movies"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/movie_details_card" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/similar_movies_recycler"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/similar_movies_txt"
+                    tools:listitem="@layout/list_item_similar_movies" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,5 +27,6 @@
     <string name="cast">Cast</string>
     <string name="crew">Crew</string>
     <string name="read_less">Read less</string>
+    <string name="similar_movies">Similar Movies</string>
 
 </resources>
