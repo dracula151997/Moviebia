@@ -21,23 +21,28 @@ public class CradleBall extends View
 
     private int loadingColor = Color.WHITE;
 
-    public CradleBall(Context context) {
+    public CradleBall(Context context)
+    {
         super(context);
         initView(null);
     }
 
-    public CradleBall(Context context, AttributeSet attrs) {
+    public CradleBall(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
         initView(attrs);
     }
 
-    public CradleBall(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CradleBall(Context context, AttributeSet attrs, int defStyleAttr)
+    {
         super(context, attrs, defStyleAttr);
         initView(attrs);
     }
 
-    private void initView(AttributeSet attrs) {
-        if (null != attrs) {
+    private void initView(AttributeSet attrs)
+    {
+        if (null != attrs)
+        {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CradleBall);
             loadingColor = typedArray.getColor(R.styleable.CradleBall_cradle_ball_color, Color.WHITE);
             typedArray.recycle();
@@ -49,26 +54,30 @@ public class CradleBall extends View
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    {
         super.onSizeChanged(w, h, oldw, oldh);
         width = w;
         height = h;
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas)
+    {
         super.onDraw(canvas);
 
         canvas.drawCircle((width / 2), (height / 2), (width / 2), paint);
     }
 
-    public void setLoadingColor(int color) {
+    public int getLoadingColor()
+    {
+        return loadingColor;
+    }
+
+    public void setLoadingColor(int color)
+    {
         loadingColor = color;
         paint.setColor(color);
         postInvalidate();
-    }
-
-    public int getLoadingColor() {
-        return loadingColor;
     }
 }

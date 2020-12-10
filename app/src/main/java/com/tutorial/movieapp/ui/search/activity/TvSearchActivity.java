@@ -35,11 +35,9 @@ import dagger.android.AndroidInjection;
 
 public class TvSearchActivity extends BaseActivity implements SearchView.OnQueryTextListener, RecyclerItemClickListener.OnRecyclerViewItemClickListener
 {
-    private ActivityMovieSearchBinding binding;
-
     @Inject
     ViewModelFactory factory;
-
+    private ActivityMovieSearchBinding binding;
     private TvSearchViewModel viewModel;
 
     private TvSearchAdapter adapter;

@@ -16,8 +16,8 @@ import java.util.List;
 
 public class SimilarTvAdapter extends RecyclerView.Adapter<SimilarTvAdapter.ViewHolder>
 {
-    private Context context;
-    private List<TvEntity> similarVideos;
+    private final Context context;
+    private final List<TvEntity> similarVideos;
 
     public SimilarTvAdapter(Context context, List<TvEntity> similarVideos)
     {

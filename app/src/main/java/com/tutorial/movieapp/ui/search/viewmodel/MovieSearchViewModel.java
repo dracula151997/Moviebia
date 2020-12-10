@@ -15,8 +15,8 @@ import javax.inject.Inject;
 
 public class MovieSearchViewModel extends BaseViewModel
 {
-    private MovieRepository movieRepository;
-    private MutableLiveData<Resource<List<MovieEntity>>> moviesLiveData = new MutableLiveData<>();
+    private final MovieRepository movieRepository;
+    private final MutableLiveData<Resource<List<MovieEntity>>> moviesLiveData = new MutableLiveData<>();
 
     @Inject
     public MovieSearchViewModel(MovieApiService apiService, MovieDao dao)

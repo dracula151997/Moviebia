@@ -9,7 +9,7 @@ import com.google.android.material.card.MaterialCardView;
 public class AspectRatioCardView extends MaterialCardView
 {
 
-    private float ratio = 1.4f;
+    private final float ratio = 1.4f;
 
     public AspectRatioCardView(Context context)
     {

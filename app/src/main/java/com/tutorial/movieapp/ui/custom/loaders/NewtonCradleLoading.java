@@ -18,22 +18,22 @@ import com.tutorial.movieapp.R;
 public class NewtonCradleLoading extends LinearLayout
 {
 
-    private CradleBall cradleBallOne;
-    private CradleBall cradleBallTwo;
-    private CradleBall cradleBallThree;
-    private CradleBall cradleBallFour;
-    private CradleBall cradleBallFive;
-
     private static final int DURATION = 400;
     private static final int SHAKE_DISTANCE = 2;
     private static final float PIVOT_X = 0.5f;
     private static final float PIVOT_Y = -3f;
     private static final int DEGREE = 30;
+    RotateAnimation rotateLeftAnimation;//cradleBallOne left to right
+    RotateAnimation rotateRightAnimation;//cradleBallFive right to left
+    TranslateAnimation shakeLeftAnimation;
+    TranslateAnimation shakeRightAnimation;
+    private CradleBall cradleBallOne;
+    private CradleBall cradleBallTwo;
+    private CradleBall cradleBallThree;
+    private CradleBall cradleBallFour;
+    private CradleBall cradleBallFive;
     private int progressColor = Color.WHITE;
-
     private boolean autoStart = false;
-
-
     private boolean isStart = false;
 
     public NewtonCradleLoading(Context context)
@@ -47,7 +47,6 @@ public class NewtonCradleLoading extends LinearLayout
         super(context, attrs);
         initView(context, attrs);
     }
-
     public NewtonCradleLoading(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
@@ -83,12 +82,6 @@ public class NewtonCradleLoading extends LinearLayout
         if (autoStart)
             start();
     }
-
-    RotateAnimation rotateLeftAnimation;//cradleBallOne left to right
-    RotateAnimation rotateRightAnimation;//cradleBallFive right to left
-    TranslateAnimation shakeLeftAnimation;
-    TranslateAnimation shakeRightAnimation;
-
 
     private void initAnim()
     {

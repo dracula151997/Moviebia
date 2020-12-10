@@ -325,6 +325,12 @@ public class CircleImageView extends AppCompatImageView
     }
 
     @Override
+    public ColorFilter getColorFilter()
+    {
+        return mColorFilter;
+    }
+
+    @Override
     public void setColorFilter(ColorFilter cf)
     {
         if (cf == mColorFilter)
@@ -335,12 +341,6 @@ public class CircleImageView extends AppCompatImageView
         mColorFilter = cf;
         applyColorFilter();
         invalidate();
-    }
-
-    @Override
-    public ColorFilter getColorFilter()
-    {
-        return mColorFilter;
     }
 
     private void applyColorFilter()

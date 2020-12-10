@@ -28,8 +28,8 @@ public class BackgroundSwitcherView extends ImageSwitcher
     private Animation bgImageInRightAnimation;
     private Animation bgImageOutRightAnimation;
 
-    private int movementDuration = 500;
-    private int widthBackgroundImageGapPercent = 12;
+    private final int movementDuration = 500;
+    private final int widthBackgroundImageGapPercent = 12;
 
     private AnimationDirection currentAnimationDirection;
 

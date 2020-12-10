@@ -26,15 +26,15 @@ public class ViewAnimator<T>
     private final double ASPECT_RATIO_HEIGHT = 6.756;
     private final double ASPECT_RATIO_CONTAINER_HEIGHT = 15.9;
 
-    private int screenWidth;
-    private int screenHeight;
+    private final int screenWidth;
+    private final int screenHeight;
     private int selectedPosition = 0;
-    private DrawerLayout drawerLayout;
-    private List<SlideMenuItem> slideMenuItems;
-    private AppCompatActivity appCompatActivity;
-    private ViewAnimatorListener animatorListener;
+    private final DrawerLayout drawerLayout;
+    private final List<SlideMenuItem> slideMenuItems;
+    private final AppCompatActivity appCompatActivity;
+    private final ViewAnimatorListener animatorListener;
 
-    private List<View> viewList = new ArrayList<>();
+    private final List<View> viewList = new ArrayList<>();
 
     public ViewAnimator(AppCompatActivity activity,
                         List<SlideMenuItem> items,

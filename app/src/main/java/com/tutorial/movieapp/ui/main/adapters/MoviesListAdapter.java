@@ -18,8 +18,8 @@ import java.util.List;
 
 public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListAdapter.ViewHolder>
 {
-    private List<MovieEntity> movies;
-    private Activity activity;
+    private final List<MovieEntity> movies;
+    private final Activity activity;
 
     public MoviesListAdapter(Activity activity)
     {

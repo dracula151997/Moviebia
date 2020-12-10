@@ -39,13 +39,11 @@ import dagger.android.AndroidInjection;
 public class TvDetailsActivity extends BaseActivity implements MovieDetailsListener
 {
 
-    private ActivityMovieDetailsBinding binding;
-    private TvEntity tvEntity;
-
     @Inject
     ViewModelFactory factory;
-
     TvDetailsViewModel viewModel;
+    private ActivityMovieDetailsBinding binding;
+    private TvEntity tvEntity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)

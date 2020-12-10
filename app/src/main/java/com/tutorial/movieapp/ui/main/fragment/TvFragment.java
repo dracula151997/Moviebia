@@ -35,13 +35,10 @@ import dagger.android.support.AndroidSupportInjection;
 public class TvFragment extends BaseFragment implements AppConstants, RecyclerItemClickListener.OnRecyclerViewItemClickListener
 {
     private static final String TAG = "TvFragment";
-    private FragmentMoviesBinding binding;
-
     @Inject
     ViewModelFactory viewModelFactory;
-
     TvListViewModel tvListViewModel;
-
+    private FragmentMoviesBinding binding;
     private TvListAdapter adapter;
 
 

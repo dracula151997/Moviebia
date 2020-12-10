@@ -16,9 +16,9 @@ import javax.inject.Inject;
 public class TvSearchViewModel extends BaseViewModel
 {
 
-    private TvRepository tvRepository;
+    private final TvRepository tvRepository;
 
-    private MutableLiveData<Resource<List<TvEntity>>> tvMoviesLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Resource<List<TvEntity>>> tvMoviesLiveData = new MutableLiveData<>();
 
     @Inject
     public TvSearchViewModel(TvApiService apiService, TvDao tvDao)

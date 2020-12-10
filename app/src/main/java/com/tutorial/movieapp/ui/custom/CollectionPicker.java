@@ -35,7 +35,8 @@ public class CollectionPicker extends LinearLayout
 
     private final ViewTreeObserver mViewTreeObserver;
     private final LayoutInflater mInflater;
-
+    private final Typeface tf;
+    private final boolean simplifiedTags;
     private List<String> mItems = new ArrayList<>();
     private LinearLayout mRow;
     private HashMap<String, Object> mCheckedItems = new HashMap<>();
@@ -53,9 +54,6 @@ public class CollectionPicker extends LinearLayout
     private int mTextColor = android.R.color.white;
     private int mRadius = 5;
     private boolean mInitialized;
-    private final Typeface tf;
-
-    private final boolean simplifiedTags;
     private boolean useRandomColor;
 
     public CollectionPicker(Context context)
@@ -106,10 +104,21 @@ public class CollectionPicker extends LinearLayout
         });
     }
 
+    private static int dpToPx(Context context, int dp)
+    {
+        float density = context.getResources().getDisplayMetrics().density;
+        return Math.round((float) dp * density);
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
         mWidth = w;
+    }
+
+    public HashMap<String, Object> getCheckedItems()
+    {
+        return mCheckedItems;
     }
 
     /**
@@ -118,11 +127,6 @@ public class CollectionPicker extends LinearLayout
     public void setCheckedItems(HashMap<String, Object> checkedItems)
     {
         mCheckedItems = checkedItems;
-    }
-
-    public HashMap<String, Object> getCheckedItems()
-    {
-        return mCheckedItems;
     }
 
     public void drawItemView()
@@ -245,7 +249,6 @@ public class CollectionPicker extends LinearLayout
         return getSelectorNormal();
     }
 
-
     @SuppressLint("ResourceAsColor")
     private StateListDrawable getSelectorNormal()
     {
@@ -283,7 +286,6 @@ public class CollectionPicker extends LinearLayout
     {
         this.useRandomColor = useRandomColor;
     }
-
 
     @SuppressLint("ResourceAsColor")
     private StateListDrawable getSelectorSelected()
@@ -404,12 +406,6 @@ public class CollectionPicker extends LinearLayout
                 .setListener(null)
                 .setStartDelay(animationDelay)
                 .start();
-    }
-
-    private static int dpToPx(Context context, int dp)
-    {
-        float density = context.getResources().getDisplayMetrics().density;
-        return Math.round((float) dp * density);
     }
 
     public interface OnItemClickListener

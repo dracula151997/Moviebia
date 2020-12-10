@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class PagerSnapHelper extends LinearSnapHelper
 {
-    private RecyclerSnapItemListener recyclerSnapItemListener;
+    private final RecyclerSnapItemListener recyclerSnapItemListener;
     private OrientationHelper mVerticalHelper, mHorizontalHelper;
 
     public PagerSnapHelper(RecyclerSnapItemListener recyclerSnapItemListener)

@@ -17,8 +17,8 @@ public abstract class MenuDrawerToggle extends ActionBarDrawerToggle implements 
 {
 
     private AppCompatActivity activity;
-    private ViewAnimator viewAnimator;
-    private LinearLayout layoutView;
+    private final ViewAnimator viewAnimator;
+    private final LinearLayout layoutView;
 
     public MenuDrawerToggle(AppCompatActivity activity,
                             DrawerLayout drawerLayout,

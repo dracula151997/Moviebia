@@ -18,10 +18,10 @@ import javax.inject.Inject;
 public class TvListViewModel extends BaseViewModel
 {
     private static final String TAG = "TvListViewModel";
-    private TvRepository tvRepository;
+    private final TvRepository tvRepository;
     private String type;
 
-    private MutableLiveData<Resource<List<TvEntity>>> tvListLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Resource<List<TvEntity>>> tvListLiveData = new MutableLiveData<>();
 
     @Inject
     public TvListViewModel(TvDao tvDao, TvApiService tvApiService)
@@ -37,11 +37,13 @@ public class TvListViewModel extends BaseViewModel
     public void fetchTvList(Long page)
     {
         tvRepository.getTvListByType(page, type)
-                .doOnSubscribe(disposable -> {
+                .doOnSubscribe(disposable ->
+                {
                     addToDisposable(disposable);
                     Log.d(TAG, "fetchTvList: disposable is added");
                 })
-                .subscribe(resource -> {
+                .subscribe(resource ->
+                {
                     Log.d(TAG, "fetchTvList: Subscribed");
                     getTvListLiveData().postValue(resource);
                 });

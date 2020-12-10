@@ -17,8 +17,8 @@ public class MovieListViewModel extends BaseViewModel
 {
 
     private final MovieRepository movieRepository;
-    private String type;
     private final MutableLiveData<Resource<List<MovieEntity>>> movieListLiveData = new MutableLiveData<>();
+    private String type;
 
     @Inject
     public MovieListViewModel(MovieDao movieDao, MovieApiService apiService)

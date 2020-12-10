@@ -15,7 +15,8 @@ public class FlipAnimation extends Animation
     private Camera mCamera;
 
     public FlipAnimation(float fromDegrees, float toDegrees,
-                         float centerX, float centerY) {
+                         float centerX, float centerY)
+    {
         mFromDegrees = fromDegrees;
         mToDegrees = toDegrees;
         mCenterX = centerX;
@@ -23,13 +24,15 @@ public class FlipAnimation extends Animation
     }
 
     @Override
-    public void initialize(int width, int height, int parentWidth, int parentHeight) {
+    public void initialize(int width, int height, int parentWidth, int parentHeight)
+    {
         super.initialize(width, height, parentWidth, parentHeight);
         mCamera = new Camera();
     }
 
     @Override
-    protected void applyTransformation(float interpolatedTime, Transformation t) {
+    protected void applyTransformation(float interpolatedTime, Transformation t)
+    {
         final float fromDegrees = mFromDegrees;
         float degrees = fromDegrees + ((mToDegrees - fromDegrees) * interpolatedTime);
 

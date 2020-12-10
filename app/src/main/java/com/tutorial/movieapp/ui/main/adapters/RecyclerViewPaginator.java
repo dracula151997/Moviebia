@@ -12,10 +12,10 @@ public abstract class RecyclerViewPaginator extends RecyclerView.OnScrollListene
 {
 
     private Long currentPage = 1l;
-    private Integer threshold = 2;
+    private final Integer threshold = 2;
     private boolean endWithAuto = false;
 
-    private RecyclerView recyclerView;
+    private final RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
 
     public RecyclerViewPaginator(RecyclerView recyclerView)
