@@ -31,7 +31,7 @@ public interface AppConstants
     String IMAGE_URL = "https://image.tmdb.org/t/p/w500%s";
 
     String TMDB_API_KEY = "5e74ee79280d770dc8ed5a2fbdda955a";
-    String YOUTUBE_API_KEY = "AIzaSyCZY8Vnw_6GcJcESL-NilTZDMSvg9ViLt8";
+    String YOUTUBE_API_KEY = "AIzaSyBTIMzt6AQgNQul4sM2Z40iVuryjiQPP1U";
 
     Map<Integer, String> MENU_MOVIE_ITEM = Collections.unmodifiableMap(
             new HashMap<Integer, String>()
