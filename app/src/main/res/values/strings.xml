@@ -31,5 +31,6 @@
     <string name="reviews">Reviews</string>
     <string name="no_reviews_for_this_movie">No reviews for this movie</string>
     <string name="search">Search</string>
+    <string name="player_error">Error Initializing Youtube player: %s</string>
 
 </resources>

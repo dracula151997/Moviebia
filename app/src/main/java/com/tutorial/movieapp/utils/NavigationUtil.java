@@ -1,6 +1,7 @@
 package com.tutorial.movieapp.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import com.tutorial.movieapp.local.entity.MovieEntity;
 import com.tutorial.movieapp.local.entity.TvEntity;
 import com.tutorial.movieapp.ui.details.activity.MovieDetailsActivity;
 import com.tutorial.movieapp.ui.details.activity.TvDetailsActivity;
+import com.tutorial.movieapp.ui.details.activity.VideoActivity;
 
 public class NavigationUtil implements AppConstants
 {
@@ -29,6 +31,13 @@ public class NavigationUtil implements AppConstants
         Intent intent = new Intent(activity, MovieDetailsActivity.class);
         intent.putExtra(INTENT_MOVIE, entity);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
+
+    public static void redirectToVideoScreen(Context context,
+                                             String videoKey) {
+        Intent intent = new Intent(context, VideoActivity.class);
+        intent.putExtra(INTENT_VIDEO_KEY, videoKey);
+        context.startActivity(intent);
     }
 
     public static void redirectToTvDetailsScreen(Activity activity, TvEntity entity, ActivityOptionsCompat options)

@@ -21,10 +21,12 @@ import com.tutorial.movieapp.remote.Resource;
 import com.tutorial.movieapp.remote.model.Cast;
 import com.tutorial.movieapp.remote.model.Crew;
 import com.tutorial.movieapp.remote.model.Review;
+import com.tutorial.movieapp.remote.model.Video;
 import com.tutorial.movieapp.ui.base.BaseActivity;
 import com.tutorial.movieapp.ui.details.adapter.CreditAdapter;
 import com.tutorial.movieapp.ui.details.adapter.ReviewsAdapter;
 import com.tutorial.movieapp.ui.details.adapter.SimilarMoviesAdapter;
+import com.tutorial.movieapp.ui.details.adapter.VideoListAdapter;
 import com.tutorial.movieapp.ui.details.viewmodel.MovieDetailsViewModel;
 import com.tutorial.movieapp.ui.main.adapters.RecyclerItemClickListener;
 import com.tutorial.movieapp.utils.AppUtils;
@@ -123,7 +125,20 @@ public class MovieDetailsActivity extends BaseActivity implements MovieDetailsLi
         updateMovieCrew(entity.getCrews());
         updateSimilarMovies(entity.getSimilarMovies());
         updateMovieReviews(entity.getReviews());
+        updateVideosList(entity.getVideos());
 
+    }
+
+    private void updateVideosList(List<Video> videos)
+    {
+        VideoListAdapter adapter = new VideoListAdapter(this, videos);
+        binding.movieVideosRecycler.smoothScrollToPosition(1);
+        binding.movieVideosRecycler.setAdapter(adapter);
+
+        binding.movieVideosRecycler.addOnItemTouchListener(new RecyclerItemClickListener(this, (parentView, childView, position) ->
+        {
+            NavigationUtil.redirectToVideoScreen(this, adapter.getItem(position).getKey());
+        }));
     }
 
     private void updateMovieReviews(List<Review> reviews)
