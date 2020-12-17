@@ -17,6 +17,7 @@
         <activity android:name=".ui.search.activity.TvSearchActivity" />
         <activity android:name=".ui.search.activity.MovieSearchActivity" />
         <activity android:name=".ui.details.activity.TvDetailsActivity"/>
+        <activity android:name=".ui.details.activity.VideoActivity"/>
         <activity android:name=".ui.main.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

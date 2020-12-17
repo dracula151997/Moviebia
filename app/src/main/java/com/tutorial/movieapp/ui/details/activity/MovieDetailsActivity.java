@@ -121,11 +121,12 @@ public class MovieDetailsActivity extends BaseActivity implements MovieDetailsLi
         binding.readMoreTxt.setVisibility(View.VISIBLE);
         binding.reviewsTxt.setVisibility(View.VISIBLE);
         binding.similarMoviesTxt.setVisibility(View.VISIBLE);
+        updateVideosList(entity.getVideos());
         updateMovieCast(entity.getCasts());
         updateMovieCrew(entity.getCrews());
         updateSimilarMovies(entity.getSimilarMovies());
         updateMovieReviews(entity.getReviews());
-        updateVideosList(entity.getVideos());
+
 
     }
 
