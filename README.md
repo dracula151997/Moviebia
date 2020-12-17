@@ -11,6 +11,7 @@ Moviebie is a simple app for The Movie Database API (https://developers.themovie
 - Showing Latest Tv Series
 - Filtering the movie or TV series (Popular, Latest, Upcoming)
 - Searching for Movie or TV series
+- Showing Movie Trailers
 
 # I used:
 - Java
@@ -21,6 +22,7 @@ Moviebie is a simple app for The Movie Database API (https://developers.themovie
 - ConstraintLayout
 - Gson
 - Picasso
+- Youtube API
 - Custom views
     * Expandable layout
     * NewtownLoader
